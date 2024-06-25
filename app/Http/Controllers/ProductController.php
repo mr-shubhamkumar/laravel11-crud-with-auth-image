@@ -74,7 +74,8 @@ class ProductController extends Controller
             $imageName = time().".".$ext;
 
             // save image to product folder
-            $image->move(public_path('uploads/products'),$imageName);
+            // $image->move(public_path('uploads/products'),$imageName);
+            $image->storeAs('public/uploads/products', $imageName);
 
             // save image name in db
             $product->image = $imageName;
@@ -130,7 +131,8 @@ class ProductController extends Controller
         if ($request->image !== null) {
 
             // delete old image
-            File::delete(public_path('uploads/products/'.$product->image));
+            // File::delete(public_path('uploads/products/'.$product->image));
+            Storage::delete('public/uploads/products/' . $product->image);
 
 
             // here store image
@@ -139,7 +141,9 @@ class ProductController extends Controller
             $imageName = time().".".$ext;
 
             // save image to product folder
-            $image->move(public_path('uploads/products'),$imageName);
+            // $image->move(public_path('uploads/products'),$imageName);
+            $image->storeAs('public/uploads/products', $imageName);
+
 
             // save image name in db
             $product->image = $imageName;
@@ -154,7 +158,7 @@ class ProductController extends Controller
     public function destroy($id)
     {
         $product = Product::findOrFail($id);
-        File::delete(public_path('uploads/products/'.$product->image));
+        Storage::delete('public/uploads/products/' . $product->image);
         $product->delete();
         return  redirect()->route('products.index')->with('success','Product delete Successfuly');
 
