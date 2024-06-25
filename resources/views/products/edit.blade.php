@@ -58,7 +58,7 @@
                             <label for="" class="form-label h6">File</label>
                             <input type="file" name="image" class="form-control  " placeholder="File">
                             @if ($product->image != "")
-                            <img width="70" src="{{asset('uploads/products/'.$product->image)}}" alt="">
+                            <img width="70" src="{{asset('storage/uploads/products/'.$product->image)}}" alt="">
                             @endif
                         </div>
                         <div class="d-grid">
